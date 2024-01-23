@@ -3,23 +3,25 @@
 {% block title %} HOME {% endblock %}
 
 {% block content %}
-<h1 align="center">NOTES<br>Homepage</h1>
+<h1 align="left" class="mt-3">Notes</h1>
 <br>
-<ul id="notes" class="list-group list-group-flush">
+<ul id="notes" class="row row-cols-4 list-group-flush">
     {% for note in user.notes %}
-        <li class="list-group-item">
-            {{ note.text }}
-            <button type="button" class="close" onClick="deleteNote('{{ note.id }}')">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </li>
+        <div class="card text-bg-light m-2" style="max-width: 15rem; height: 7rem;">
+            <li class="card-body list-group-item">
+                {{ note.text }}
+                <button type="button" class="close" onClick="deleteNote('{{ note.id }}')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </li>
+        </div>
+        
     {% endfor %}
 </ul>
 
 <form method="POST">
-    <textarea name="note" id="note" class="form-control"></textarea>
-    <br>
-    <div align="center">
+    <div align="center" class="container col-sm-7">
+        <textarea name="note" id="note" class="form-control m-3"></textarea>
         <button type="submit" class="btn btn-primary">Add Note</button>
     </div>
 </form>

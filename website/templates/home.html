@@ -7,25 +7,45 @@
 <br>
 <ul id="notes" class="row row-cols-4 list-group-flush">
     {% for note in user.notes %}
-        <div class="card text-bg-light m-2">
-            <h5 class="card-header card-title">
+        <div class="card text-bg-light m-2 border border-secondary">
+            <h5 class="card-header">
                 {{ note.title }}
+                
                 <button type="button" class="close" onClick="deleteNote('{{ note.id }}')">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </h5>
             <li class="card-body list-group-item">{{ note.text }}</li>
+            <div class="card-footer">
+                <small class="text-body-secondary">
+                    {% set formatted_date = note.date.strftime('%B %d') %}
+                    {{ formatted_date }}
+                </small>
+            </div>
         </div>
         
     {% endfor %}
 </ul>
 
-<form method="POST">
-    <div align="center" class="container col-sm-7">
-        <input name="title" id="title" class="form-control m-3"/>
-        <textarea name="note" id="note" class="form-control m-3"></textarea>
-        <button type="submit" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i> Add Note</button>
-    </div>
-</form>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#noteModal"><i class="fa fa-pencil-square-o"></i> Create Note</button>
+
+<div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModal" aria-hidden="true">
+    <form method="POST">
+        <div class="modal-dialog modal-content modal-dialog-scrollable">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="noteModal">Create note</h1>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <input name="title" id="title" class="form-control note-form" placeholder="Title"/>
+                <textarea name="note" id="note" class="form-control note-form" placeholder="Any thoughts to share?"></textarea>            
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i> Add Note</button>
+            </div>
+        </div>
+    </form>
+</div>
+
 {% endblock %}
 

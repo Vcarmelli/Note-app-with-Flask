@@ -7,13 +7,14 @@
 <br>
 <ul id="notes" class="row row-cols-4 list-group-flush">
     {% for note in user.notes %}
-        <div class="card text-bg-light m-2" style="max-width: 15rem; height: 7rem;">
-            <li class="card-body list-group-item">
-                {{ note.text }}
+        <div class="card text-bg-light m-2">
+            <h5 class="card-header card-title">
+                {{ note.title }}
                 <button type="button" class="close" onClick="deleteNote('{{ note.id }}')">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </li>
+            </h5>
+            <li class="card-body list-group-item">{{ note.text }}</li>
         </div>
         
     {% endfor %}
@@ -21,8 +22,9 @@
 
 <form method="POST">
     <div align="center" class="container col-sm-7">
+        <input name="title" id="title" class="form-control m-3"/>
         <textarea name="note" id="note" class="form-control m-3"></textarea>
-        <button type="submit" class="btn btn-primary">Add Note</button>
+        <button type="submit" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i> Add Note</button>
     </div>
 </form>
 {% endblock %}
